@@ -1,0 +1,60 @@
+/* 
+    Cascading Rules of CSS
+
+    1. The last mentioned css rule shows gets applied
+
+*/
+
+.title {
+    color: red;
+    border: 1px solid black;
+}
+
+.super-title {
+    color: blue;
+}
+
+/* <h1 class="super-title title"> hello </h1> 
+super-title text color will be applied because it is mentioned at
+the last + even though the border will appear */
+
+/* 2. More specific classes are applied */
+
+.super-title.title3 {
+    color: yellow;
+}
+
+.title3 {
+    color: green;
+    border: 2px dotted purple;
+}
+
+/* color of the h1 will be yellow though 
+the purple border will appear 
+
+
+    Rule 3: Classes are more specific than tag selectors
+    + ID is more specific than classes
+
+*/
+
+
+h1 {
+    color: purple;
+}
+
+.title {
+    color: green;
+}
+
+/* text color will be green */
+
+.title {
+    color: cyan;
+}
+
+#heading {
+    color: black;
+}
+
+/* text color will be black */
