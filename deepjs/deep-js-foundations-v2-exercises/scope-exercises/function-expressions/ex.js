@@ -34,6 +34,21 @@ function printRecords(recordIds) {
 
 function paidStudentsToEnroll() {
 	// TODO
+	
+	var studentsToEnroll = studentRecords.map( function paidNotEnroll(student) {
+		if (student.paid && !currentEnrollment.includes(student.id)) {
+			return student.id;
+		}
+	});
+	
+	var paidStudents = [...currentEnrollment, ...studentsToEnroll];
+	
+	paidStudents.forEach(function logEnrolledStudents(student) {
+		let studentRecord = studentRecords.find( function getStudentData( studentObj ) { return studentObj.id == student })
+		console.log(`${student.name} (${student.id}): ${student.paid? "Paid": "Not Paid"}`);
+	});
+	
+	
 }
 
 function remindUnpaid(recordIds) {
