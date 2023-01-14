@@ -12,13 +12,6 @@ var studentRecords = [
 	{ id: 867, name: "Greg", paid: false, },
 ];
 
-printRecords(currentEnrollment);
-console.log("----");
-currentEnrollment = paidStudentsToEnroll();
-printRecords(currentEnrollment);
-console.log("----");
-remindUnpaid(currentEnrollment);
-
 /*
 	Bob (664): Not Paid
 	Henry (105): Not Paid
@@ -40,20 +33,31 @@ remindUnpaid(currentEnrollment);
 
 // ********************************
 
-var defineWorkshop() = (function(){
+var defineWorkshop = (function(){
 
 var currentEnrollment = [];
 var studentRecords = [];
 
-var interface = {
-	addStudent(id,name,paid),
-	enrollStudent(id),
-	printCurrentEnrollment(),
-	enrollPaidStudents(),
-	remindUnpaidStudents(),
+var interface;
+
+return interface = {
+    currentEnrollment,
+	addStudent,
+	enrollStudent,
+	printRecords,
+	paidStudentsToEnroll,
+	remindUnpaid
 };
 
-return interface;
+function addStudent(sid, sname, spaid) {
+    studentRecords.push({
+        id: sid, name: `${sname}`, paid: spaid
+    });
+}
+
+function enrollStudent(sid) {
+    currentEnrollment.push(sid);
+}
 
 function getStudentFromId(studentId) {
 	return studentRecords.find(matchId);
@@ -109,10 +113,10 @@ function notYetPaid(studentId) {
 	var record = getStudentFromId(studentId);
 	return !record.paid;
 }
+}
+)();
 
-)()
-
-var deepjs = defineWorkshop();
+var deepjs = defineWorkshop;
 
 studentRecords.forEach((student) => {
 	deepjs.addStudent(student.id, student.name, student.paid);
@@ -120,4 +124,11 @@ studentRecords.forEach((student) => {
 	
 currentEnrollment.forEach((id) => {
 	deepjs.enrollStudent(id);
-	})
+	});
+
+deepjs.printRecords(currentEnrollment);
+console.log("----");
+currentEnrollment = deepjs.paidStudentsToEnroll();
+deepjs.printRecords(currentEnrollment);
+console.log("----");
+deepjs.remindUnpaid(currentEnrollment);
