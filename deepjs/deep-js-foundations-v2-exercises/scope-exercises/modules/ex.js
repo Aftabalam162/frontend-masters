@@ -40,6 +40,21 @@ remindUnpaid(currentEnrollment);
 
 // ********************************
 
+var defineWorkshop() = (function(){
+
+var currentEnrollment = [];
+var studentRecords = [];
+
+var interface = {
+	addStudent(id,name,paid),
+	enrollStudent(id),
+	printCurrentEnrollment(),
+	enrollPaidStudents(),
+	remindUnpaidStudents(),
+};
+
+return interface;
+
 function getStudentFromId(studentId) {
 	return studentRecords.find(matchId);
 
@@ -94,3 +109,15 @@ function notYetPaid(studentId) {
 	var record = getStudentFromId(studentId);
 	return !record.paid;
 }
+
+)()
+
+var deepjs = defineWorkshop();
+
+studentRecords.forEach((student) => {
+	deepjs.addStudent(student.id, student.name, student.paid);
+	});
+	
+currentEnrollment.forEach((id) => {
+	deepjs.enrollStudent(id);
+	})
